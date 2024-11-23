@@ -1,6 +1,3 @@
-// INDEX설정을 위한 i 값
-let i = 0;
-
 // querySelector의 사용이 많아 getNode로 정정
 const getNode = (node, context = document) => {
   if (context.nodeType !== 9 && typeof context === 'string') {
@@ -17,33 +14,32 @@ const getNodes = (node, context = document) => {
 };
 
 const nav = getNode('.nav');
+const visual = getNode('.visual img');
+const title = getNode('.nickName');
+const imgList = getNodes('ul > li');
+
+// INDEX설정을 위한 i 값
+let i = 0;
 
 //배경색 이미지 함수
 const setBgIMG = (url) => {
-  const body = getNode('body');
-
-  body.style.backgroundImage = `url(${url})`;
+  document.body.style.backgroundImage = `url(${url})`;
 };
 
 // 이미지 변경 함수
 const setImage = (alt, url) => {
-  const visual = getNode('.visual img');
-
   visual.alt = alt;
   visual.src = url;
 };
 
 // 제목 변경 함수
 const setNameText = (name) => {
-  const title = getNode('.nickName');
-
   title.textContent = name;
 };
 
 // is-actvie할당 함수
 const setIsActive = (node) => {
   // li태그 모두 imgList에 저장
-  const imgList = getNodes('ul > li');
 
   imgList.forEach((v) => {
     v.classList.remove('is-active');

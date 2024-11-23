@@ -7,15 +7,6 @@
 5. 함수 분리
 
 */
-
-// 소리 객체 저장
-const sound = {
-  EMBER: new AudioPlayer('./assets/audio/ember.m4a'),
-  WADE: new AudioPlayer('./assets/audio/Wade.m4a'),
-  CLOD: new AudioPlayer('./assets/audio/Clod.m4a'),
-  GALE: new AudioPlayer('./assets/audio/Gale.m4a'),
-};
-
 // querySelector의 사용이 많아 getNode로 정정
 const getNode = (node, context = document) => {
   if (context.nodeType !== 9) {
@@ -31,34 +22,38 @@ const getNodes = (node, context = document) => {
   return context.querySelectorAll(node);
 };
 
+// 소리 객체 저장
+const sound = {
+  EMBER: new AudioPlayer('./assets/audio/ember.m4a'),
+  WADE: new AudioPlayer('./assets/audio/Wade.m4a'),
+  CLOD: new AudioPlayer('./assets/audio/Clod.m4a'),
+  GALE: new AudioPlayer('./assets/audio/Gale.m4a'),
+};
+
 const nav = getNode('.nav');
+const visual = getNode('.visual img');
+const title = getNode('.nickName');
+const imgList = getNodes('ul > li');
 
 //배경색 바꾸기 함수
 const setBgColor = (colorA, colorB = '#000') => {
-  const body = getNode('body');
-
-  body.style.background = `linear-gradient(to bottom, ${colorA},${colorB})`;
+  document.body.style.background = `linear-gradient(to bottom, ${colorA},${colorB})`;
 };
 
 // 이미지 변경 함수
 const setImage = ({ alt, name }) => {
-  const visual = getNode('.visual img');
-
   visual.alt = alt;
   visual.src = `./assets/${name}.jpeg`;
 };
 
 // 제목 변경 함수
 const setNameText = (name) => {
-  const title = getNode('.nickName');
-
   title.textContent = name;
 };
 
 // is-actvie할당 함수
 const setIsActive = (node) => {
   // li태그 모두 imgList에 저장
-  const imgList = getNodes('ul > li');
 
   imgList.forEach((v) => {
     v.classList.remove('is-active');
@@ -88,14 +83,12 @@ const handleClick = (e) => {
 
   // data-index의 값과 그에 해당하는 data를 index와 dataSet에 저장
   const index = li.dataset.index;
-
   const dataSet = data[index - 1];
 
   // 제목 변경
   setNameText(dataSet.name);
 
   // 사진 바꾸기
-
   setImage(dataSet);
 
   // 배경색 바꾸기
