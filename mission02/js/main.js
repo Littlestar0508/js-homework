@@ -35,22 +35,6 @@ const visual = getNode('.visual img');
 const title = getNode('.nickName');
 const imgList = getNodes('ul > li');
 
-//배경색 바꾸기 함수
-const setBgColor = (colorA, colorB = '#000') => {
-  document.body.style.background = `linear-gradient(to bottom, ${colorA},${colorB})`;
-};
-
-// 이미지 변경 함수
-const setImage = ({ alt, name }) => {
-  visual.alt = alt;
-  visual.src = `./assets/${name}.jpeg`;
-};
-
-// 제목 변경 함수
-const setNameText = (name) => {
-  title.textContent = name;
-};
-
 // is-actvie할당 함수
 const setIsActive = (node) => {
   // li태그 모두 imgList에 저장
@@ -60,6 +44,21 @@ const setIsActive = (node) => {
   });
 
   node.classList.add('is-active');
+};
+
+// 제목 변경 함수
+const setNameText = (name) => {
+  title.textContent = name;
+};
+
+const setImage = ({ alt, name }) => {
+  visual.alt = alt;
+  visual.src = `./assets/${name}.jpeg`;
+};
+
+//배경색 바꾸기 함수
+const setBgColor = (colorA, colorB = '#000') => {
+  document.body.style.background = `linear-gradient(to bottom, ${colorA},${colorB})`;
 };
 
 // 대표 이미지 변경시 소리 이벤트 함수
@@ -76,14 +75,14 @@ const handleClick = (e) => {
   // li 영역 선택(img를 클릭했어도 li를 반환하도록 closest사용)
   const li = e.target.closest('li');
 
+  // data-index의 값과 그에 해당하는 data를 index와 dataSet에 저장
+  const index = li.dataset.index;
+  const dataSet = data[index - 1];
+
   // 만약 li의 영역을 빠져 나갔다면 이벤트 실행X
   if (!li) return;
 
   setIsActive(li);
-
-  // data-index의 값과 그에 해당하는 data를 index와 dataSet에 저장
-  const index = li.dataset.index;
-  const dataSet = data[index - 1];
 
   // 제목 변경
   setNameText(dataSet.name);

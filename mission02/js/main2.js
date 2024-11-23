@@ -16,14 +16,54 @@ const getNodes = (node, context = document) => {
 const nav = getNode('.nav');
 const visual = getNode('.visual img');
 const title = getNode('.nickName');
-const imgList = getNodes('ul > li');
 
 // INDEX설정을 위한 i 값
 let i = 0;
 
-//배경색 이미지 함수
-const setBgIMG = (url) => {
-  document.body.style.backgroundImage = `url(${url})`;
+// 앨범의 정보를 fetch해오는 함수
+const getAlbum = async (artist, albumName) => {
+  const result = await fetch(
+    `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=ed010a27ee3ead3137b0fe3ef45b9187&artist=${artist}&album=${albumName}&format=json`
+  );
+
+  const data = await result.json();
+
+  console.log(data);
+
+  const template = `
+      <li data-index="${++i}">
+      <button>
+        <img src="${data.album.image[4]['#text']}" alt="${data.album.artist} - ${data.album.name} 앨범" />
+      </button>
+    </li>`;
+
+  getNode('ul').insertAdjacentHTML('beforeend', template);
+};
+
+// 앨범 자켓 li항목으로 추가하는 함수
+const getAlbumData = async () => {
+  await getAlbum('쏜애플', '계몽');
+  await getAlbum('검정치마', 'TEAM+BABY');
+  await getAlbum('윤하', 'resCuE');
+  await getAlbum('장범준', '장범준+2집');
+};
+
+// is-actvie할당 함수
+const setIsActive = (node) => {
+  // 비동기 통신으로 li가 이후에 생기므로 함수 내부에 li모음을 생성
+  // li태그 모두 imgList에 저장
+  const imgList = getNodes('ul li');
+
+  imgList.forEach((v) => {
+    v.classList.remove('is-active');
+  });
+
+  node.classList.add('is-active');
+};
+
+// 제목 변경 함수
+const setNameText = (name) => {
+  title.textContent = name;
 };
 
 // 이미지 변경 함수
@@ -32,20 +72,9 @@ const setImage = (alt, url) => {
   visual.src = url;
 };
 
-// 제목 변경 함수
-const setNameText = (name) => {
-  title.textContent = name;
-};
-
-// is-actvie할당 함수
-const setIsActive = (node) => {
-  // li태그 모두 imgList에 저장
-
-  imgList.forEach((v) => {
-    v.classList.remove('is-active');
-  });
-
-  node.classList.add('is-active');
+//배경색 이미지 함수
+const setBgIMG = (url) => {
+  document.body.style.backgroundImage = `url(${url})`;
 };
 
 const handleClick = (e) => {
@@ -57,9 +86,6 @@ const handleClick = (e) => {
   if (!li) return;
 
   setIsActive(li);
-
-  // data-index의 값과 그에 해당하는 data를 index와 dataSet에 저장
-  const index = li.dataset.index;
 
   // 제목 변경
   setNameText(img.alt);
@@ -83,33 +109,7 @@ const handleClick = (e) => {
   );
 };
 
-// 앨범 정보 가져오는 함수
-
-const getAlbum = async (artist, albumName) => {
-  const result = await fetch(
-    `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=ed010a27ee3ead3137b0fe3ef45b9187&artist=${artist}&album=${albumName}&format=json`
-  );
-
-  const data = await result.json();
-  console.log(data);
-  const template = `
-      <li data-index="${++i}">
-      <button>
-        <img src="${data.album.image[4]['#text']}" alt="${data.album.artist} - ${data.album.name} 앨범" />
-      </button>
-    </li>`;
-  getNode('ul').insertAdjacentHTML('beforeend', template);
-};
-
-// 앨범 자켓 li항목으로 추가하는 함수
-
-const getAlbumData = async () => {
-  await getAlbum('쏜애플', '계몽');
-  await getAlbum('검정치마', 'TEAM+BABY');
-  await getAlbum('윤하', 'resCuE');
-  await getAlbum('장범준', '장범준+2집');
-};
-
+// li태그 생성
 getAlbumData();
 
 // 이벤트 할당
