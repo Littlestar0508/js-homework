@@ -1,5 +1,3 @@
-
-
 class AudioPlayer {
   #audio = null;
 
@@ -18,8 +16,8 @@ class AudioPlayer {
 
   loopPlay() {
     this.play();
-    on(this.#audio, 'ended', this.play.bind(this));
-    // this.#audio.addEventListener('ended', this.play.bind(this));
+    // on(this.#audio, 'ended', this.play.bind(this));
+    this.#audio.addEventListener('ended', this.play.bind(this));
   }
 
   pause() {
@@ -35,8 +33,7 @@ class AudioPlayer {
     return !this.#audio.paused;
   }
 
-  get time(){
+  get time() {
     return this.#audio.currentTime;
   }
 }
-

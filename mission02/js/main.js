@@ -8,6 +8,14 @@
 
 */
 
+// 소리 객체 저장
+const sound = {
+  EMBER: new AudioPlayer('./assets/audio/ember.m4a'),
+  WADE: new AudioPlayer('./assets/audio/Wade.m4a'),
+  CLOD: new AudioPlayer('./assets/audio/Clod.m4a'),
+  GALE: new AudioPlayer('./assets/audio/Gale.m4a'),
+};
+
 // querySelector의 사용이 많아 getNode로 정정
 const getNode = (node, context = document) => {
   if (context.nodeType !== 9) {
@@ -59,6 +67,15 @@ const setIsActive = (node) => {
   node.classList.add('is-active');
 };
 
+// 대표 이미지 변경시 소리 이벤트 함수
+const changeSound = (index) => {
+  for (const key in sound) {
+    sound[key].stop();
+  }
+
+  sound[data[index - 1].name].play();
+};
+
 // 클릭 이벤트 핸들러
 const handleClick = (e) => {
   // li 영역 선택(img를 클릭했어도 li를 반환하도록 closest사용)
@@ -83,6 +100,9 @@ const handleClick = (e) => {
 
   // 배경색 바꾸기
   setBgColor(dataSet.color[0], dataSet.color[1]);
+
+  // 소리 재생
+  changeSound(index);
 };
 
 // 이벤트 할당
