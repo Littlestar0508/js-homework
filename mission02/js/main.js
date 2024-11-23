@@ -103,6 +103,17 @@ const handleClick = (e) => {
 
   // 소리 재생
   changeSound(index);
+
+  // gsap 애니메이션 적용
+  gsap.fromTo(
+    '.is-active',
+    {
+      x: -30,
+      y: 30,
+      opacity: 0,
+    },
+    { x: 0, y: 0, opacity: 1 }
+  );
 };
 
 // 이벤트 할당
