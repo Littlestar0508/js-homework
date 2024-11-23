@@ -6,7 +6,8 @@ img {
 
 body {
   transition: all 0.3s;
-  background: linear-gradient(to bottom, #ff6a00, #720400);
+  /* background: linear-gradient(to bottom, #ff6a00, #720400); */
+  background-image: url('https://lastfm.freetls.fastly.net/i/u/300x300/480083bc809acaefd94c7227299eca91.jpg');
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
