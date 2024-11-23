@@ -28,8 +28,6 @@ const getAlbum = async (artist, albumName) => {
 
   const data = await result.json();
 
-  console.log(data);
-
   const template = `
       <li data-index="${++i}">
       <button>
@@ -80,10 +78,11 @@ const setBgIMG = (url) => {
 const handleClick = (e) => {
   // li 영역 선택(img를 클릭했어도 li를 반환하도록 closest사용)
   const li = e.target.closest('li');
+  if (!li) return;
+
   const img = getNode('img', li);
 
   // 만약 li의 영역을 빠져 나갔다면 이벤트 실행X
-  if (!li) return;
 
   setIsActive(li);
 
