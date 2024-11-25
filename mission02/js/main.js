@@ -53,7 +53,7 @@ const setNameText = (name) => {
 
 const setImage = ({ alt, name }) => {
   visual.alt = alt;
-  visual.src = `./assets/${name}.jpeg`;
+  visual.src = `./assets/${name.toLowerCase()}.jpeg`;
 };
 
 //배경색 바꾸기 함수
