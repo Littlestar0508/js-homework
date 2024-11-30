@@ -21,7 +21,7 @@ const swiper = new Swiper('.swiper', {
   on: {
     slideChangeTransitionEnd: function () {
       const container = document.querySelector('.container');
-      container.style.backgroundImage = `url('../../assets/bgImg${this.activeIndex}.jpg')`;
+      container.style.backgroundImage = `url('./Swiper/assets/bgImg${this.activeIndex}.jpg')`;
       document.body.style.backgroundColor = colorData[this.activeIndex];
     },
   },
