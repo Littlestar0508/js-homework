@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server mission02 --host=localhost --port=5500 --no-browser"
+    "dev": "live-server Swiper --host=localhost --port=5500 --no-browser"
   },
   "keywords": [],
   "author": "littlestar58",
