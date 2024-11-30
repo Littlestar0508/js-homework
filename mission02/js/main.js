@@ -25,9 +25,9 @@ const getNodes = (node, context = document) => {
 // 소리 객체 저장
 const sound = {
   EMBER: new AudioPlayer('./assets/audio/ember.m4a'),
-  WADE: new AudioPlayer('./assets/audio/Wade.m4a'),
-  CLOD: new AudioPlayer('./assets/audio/Clod.m4a'),
-  GALE: new AudioPlayer('./assets/audio/Gale.m4a'),
+  WADE: new AudioPlayer('./assets/audio/wade.m4a'),
+  CLOD: new AudioPlayer('./assets/audio/clod.m4a'),
+  GALE: new AudioPlayer('./assets/audio/gale.m4a'),
 };
 
 const nav = getNode('.nav');
@@ -53,7 +53,7 @@ const setNameText = (name) => {
 
 const setImage = ({ alt, name }) => {
   visual.alt = alt;
-  visual.src = `./assets/${name}.jpeg`;
+  visual.src = `./assets/${name.toLowerCase()}.jpeg`;
 };
 
 //배경색 바꾸기 함수
